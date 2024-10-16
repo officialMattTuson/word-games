@@ -23,3 +23,29 @@
     }
   }
 }
+
+.connections__controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.action-btn {
+  background-color: azure;
+  border-radius: 2rem;
+  padding: 1rem;
+  cursor: pointer;
+  font-weight: 700;
+  width: 6rem;
+
+  &:hover {
+    filter: brightness(0.95);
+  }
+}
+
+.disabled {
+  cursor: default;
+  &:hover {
+    filter: brightness(1);
+  }
+}
