@@ -14,13 +14,10 @@
   grid-template-rows: repeat(4, 1fr);
   gap: 1rem;
   justify-content: center;
+  margin-block-end: 1rem;
 
   > * {
     cursor: pointer;
-
-    &:hover {
-      background-color: bisque;
-    }
   }
 }
 

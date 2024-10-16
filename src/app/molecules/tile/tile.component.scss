@@ -2,10 +2,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 3px solid black;
-  padding-block:2rem;
+  height: 6rem;
+  width: 10rem;
+  background-color: lavender;
+
+  &:hover {
+    filter: brightness(0.95);
+  }
 }
 
 .selected {
-  background-color: bisque;
+  background-color: rgb(92, 92, 122);
+  color: lavender;
+}
+
+.tile__text-box span {
+  font-size: 1.2rem;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 800;
 }
