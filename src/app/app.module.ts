@@ -7,16 +7,9 @@ import { ConnectionsComponent } from './components/connections/connections.compo
 import { TileComponent } from './molecules/tile/tile.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ConnectionsComponent,
-    TileComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  declarations: [AppComponent, ConnectionsComponent, TileComponent],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

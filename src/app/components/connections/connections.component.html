@@ -1,7 +1,7 @@
 <div class="connections__container">
   <div class="connections__row">
-    <app-tile 
-      *ngFor="let tile of tiles" 
+    <app-tile
+      *ngFor="let tile of tiles"
       [option]="tile.option"
       [isHighlighted]="getSelectedTile(tile)"
       (isSelected)="handleSelectedTile(tile.option)"
@@ -9,9 +9,23 @@
     </app-tile>
   </div>
   <div class="connections__controls">
-    <button (click)="handleHelpRequest()">Help</button>
-    <button (click)="handleShuffleRequest()">Shuffle</button>
-    <button (click)="handleResetRequest()">Deselect</button>
-    <button (click)="handleSubmission()">Submit</button>
+    <button class="action-btn" (click)="handleHelpRequest()">Help</button>
+    <button class="action-btn" (click)="handleShuffleRequest()">Shuffle</button>
+    <button
+      class="action-btn"
+      [disabled]="selectedTiles.length === 0"
+      [ngClass]="{ disabled: selectedTiles.length === 0 }"
+      (click)="handleResetRequest()"
+    >
+      Deselect
+    </button>
+    <button
+      class="action-btn"
+      [disabled]="selectedTiles.length < 4"
+      [ngClass]="{ disabled: selectedTiles.length < 4 }"
+      (click)="handleSubmission()"
+    >
+      Submit
+    </button>
   </div>
 </div>
