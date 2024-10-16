@@ -1,0 +1,11 @@
+.tile__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid black;
+  padding-block:2rem;
+}
+
+.selected {
+  background-color: bisque;
+}

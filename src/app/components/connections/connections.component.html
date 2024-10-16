@@ -1,0 +1,17 @@
+<div class="connections__container">
+  <div class="connections__row">
+    <app-tile 
+      *ngFor="let tile of tiles" 
+      [option]="tile.option"
+      [isHighlighted]="getSelectedTile(tile)"
+      (isSelected)="handleSelectedTile(tile.option)"
+    >
+    </app-tile>
+  </div>
+  <div class="connections__controls">
+    <button (click)="handleHelpRequest()">Help</button>
+    <button (click)="handleShuffleRequest()">Shuffle</button>
+    <button (click)="handleResetRequest()">Deselect</button>
+    <button (click)="handleSubmission()">Submit</button>
+  </div>
+</div>

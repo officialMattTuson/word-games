@@ -1,0 +1,9 @@
+<div
+  class="tile__container"
+  (click)="selectTile()"
+  [ngClass]="{ selected: isHighlighted }"
+>
+  <div class="tile__text-box">
+    <span>{{ option }}</span>
+  </div>
+</div>
