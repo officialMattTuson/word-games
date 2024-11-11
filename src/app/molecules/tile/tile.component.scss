@@ -2,8 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 6rem;
-  width: 10rem;
+  height: 100px;
+  width: 160px;
   background-color: lavender;
 
   &:hover {
@@ -16,8 +16,26 @@
   color: lavender;
 }
 
+.correct {
+  animation: correct-group-animation 0.5s ease-in forwards;
+}
+
+@keyframes correct-group-animation {
+  0% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+    color: lavender;
+    background-color: rgb(121, 155, 123);
+  }
+}
+
 .tile__text-box span {
   font-size: 1.2rem;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-weight: 800;
 }

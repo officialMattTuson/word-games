@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Tile } from 'src/app/models/tile.model';
+import { Tile, tiles } from 'src/app/models/tile.model';
 
 @Component({
   selector: 'app-connections',
@@ -7,37 +7,22 @@ import { Tile } from 'src/app/models/tile.model';
   styleUrls: ['./connections.component.scss'],
 })
 export class ConnectionsComponent {
-  tiles: Tile[] = [
-    { option: 'Balloon', group: 1, category: 'Getting from A to B' },
-    { option: 'Car', group: 1, category: 'Getting from A to B' },
-    { option: 'Boat', group: 1, category: 'Getting from A to B' },
-    { option: 'Train', group: 1, category: 'Getting from A to B' },
-    { option: 'Mouse', group: 2, category: 'Household pets' },
-    { option: 'Rabbit', group: 2, category: 'Household pets' },
-    { option: 'Cat', group: 2, category: 'Household pets' },
-    { option: 'Dog', group: 2, category: 'Household pets' },
-    { option: 'Sun', group: 3, category: 'In the sky' },
-    { option: 'Moon', group: 3, category: 'In the sky' },
-    { option: 'Star', group: 3, category: 'In the sky' },
-    { option: 'Cloud', group: 3, category: 'In the sky' },
-    { option: 'Laptop', group: 4, category: 'Household items' },
-    { option: 'Phone', group: 4, category: 'Household items' },
-    { option: 'Book', group: 4, category: 'Household items' },
-    { option: 'Pen', group: 4, category: 'Household items' },
-  ];
-
+  tiles = tiles;
   selectedTiles: Tile[] = [];
+  animateCells = false;
 
   constructor() {
-    this.scrambleTiles(this.tiles);
+    this.scrambleTiles();
   }
-  
-  scrambleTiles(array: Tile[]): Tile[] {
-    for (let i = array.length - 1; i > 0; i--) {
+
+  scrambleTiles() {
+    for (let i = this.tiles.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+      [this.tiles[i], this.tiles[j]] = [this.tiles[j], this.tiles[i]];
     }
-    return array;
+    this.tiles.forEach((tile, index) => {
+      tile.index = index;
+    });
   }
 
   handleSelectedTile(option: string): void {
@@ -49,29 +34,31 @@ export class ConnectionsComponent {
       this.selectedTiles = this.selectedTiles.filter(
         (tile) => tile.option !== option
       );
+      selectedTile.isSelected = false;
       return;
     }
     if (this.selectedTiles.length > 3) {
       return;
     }
+    selectedTile.isSelected = true;
     this.selectedTiles.push(selectedTile);
-  }
-
-  getSelectedTile(tile: Tile): boolean {
-    return this.selectedTiles.includes(tile);
   }
 
   handleHelpRequest() {}
 
   handleShuffleRequest() {
-    this.scrambleTiles(this.tiles);
+    this.scrambleTiles();
   }
 
   handleResetRequest() {
     this.selectedTiles = [];
+    this.tiles.forEach((tile) => {
+      tile.isSelected = false;
+    });
   }
 
   handleSubmission() {
+    this.animateCells = true;
     if (this.selectedTiles.length !== 4) {
       console.log('Select 4 tiles to submit');
       return;
@@ -85,8 +72,27 @@ export class ConnectionsComponent {
 
     if (isSuccessfulSubmission) {
       console.log('Sweet!');
+      this.moveSelectedTilesToTop();
     } else {
+
       console.log('That is incorrect');
     }
+    setTimeout(() => {
+      this.animateCells = false;
+    }, 500);
+  }
+
+  moveSelectedTilesToTop(): void {
+    const correctTiles = this.tiles.filter((tile) => tile.isCorrect);
+    const selectedTiles = this.tiles.filter((tile) => tile.isSelected);
+    const remainingTiles = this.tiles.filter(
+      (tile) => !tile.isSelected && !tile.isCorrect
+    );
+    this.selectedTiles.forEach((tile) => {
+      tile.isSelected = false;
+      tile.isCorrect = true;
+    });
+    this.selectedTiles = [];
+    this.tiles = [...correctTiles, ...selectedTiles, ...remainingTiles];
   }
 }
