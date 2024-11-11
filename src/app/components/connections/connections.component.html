@@ -1,10 +1,12 @@
 <div class="connections__container">
   <div class="connections__row">
     <app-tile
-      *ngFor="let tile of tiles"
+      *ngFor="let tile of tiles; let i = index"
       [option]="tile.option"
-      [isHighlighted]="getSelectedTile(tile)"
+      [isHighlighted]="tile.isSelected"
+      [isCorrect]="tile.isCorrect"
       (isSelected)="handleSelectedTile(tile.option)"
+      [ngClass]="{'animate-tiles': !tile.isCorrect && animateCells}"
     >
     </app-tile>
   </div>

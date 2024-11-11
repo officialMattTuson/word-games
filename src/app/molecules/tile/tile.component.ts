@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class TileComponent {
   @Input() option: string = '';
   @Input() isHighlighted = false;
+  @Input() isCorrect = false;
 
   @Output() isSelected = new EventEmitter<string>();
 

@@ -1,14 +1,16 @@
 .connections__container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  height: 100vh;
-  margin: auto;
-  width: 40%;
+  margin-inline: auto;
+  margin-block-start: 6rem;
+  width: 600px;
   justify-content: center;
+  align-content: center;
+  position: relative;
 }
 
 .connections__row {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
@@ -18,6 +20,23 @@
 
   > * {
     cursor: pointer;
+    transition: transform 0.5s ease;
+  }
+}
+
+.animate-tiles {
+  animation: correct-group-animation 0.5s ease-in-out;
+}
+
+@keyframes correct-group-animation {
+  0% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
   }
 }
 
@@ -37,12 +56,5 @@
 
   &:hover {
     filter: brightness(0.95);
-  }
-}
-
-.disabled {
-  cursor: default;
-  &:hover {
-    filter: brightness(1);
   }
 }
